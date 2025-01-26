@@ -12,7 +12,7 @@ public class Principal {
         gestor.agregarPersona(12, "Ana", 30);
         gestor.agregarPersona(23, "Luis", 40);
         gestor.agregarPersona(34, "Marta", 35);
-        gestor.agregarPersona(45, "Carlos", 28);
+
 
         // Mostrando la tabla hash
         System.out.println("Contenido de la tabla hash:");
@@ -22,7 +22,7 @@ public class Principal {
         gestor.buscarPersona(12);
 
         // Eliminando una persona
-        gestor.eliminarPersona(23);
+        gestor.eliminarPersona(1);
 
         // Mostrando la tabla después de eliminación
         System.out.println("Tabla hash después de eliminar:");
