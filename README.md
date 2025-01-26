@@ -93,7 +93,7 @@ Persona con ID 1 eliminada correctamente.
 
 ## Autor
 
-- **[Tu Nombre]** - Desarrollador
+- **Lorenzo Carlos Boda Székely** - Desarrollador
 
 ## Licencia
 
