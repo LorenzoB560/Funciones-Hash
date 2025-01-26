@@ -5,6 +5,7 @@ import modelo.Persona;
 
 /**
  * Implementación de una Tabla Hash básica con manejo de colisiones mediante listas enlazadas.
+ * Utiliza un factor de carga para determinar si necesita redimensionarse.
  */
 public class TablaHash {
     private static int TAMANIO = 10;
@@ -13,6 +14,9 @@ public class TablaHash {
     private int cantidadElementos = 0;
     private LinkedList<Persona>[] tabla;
 
+    /**
+     * Constructor que inicializa la tabla hash con una lista enlazada en cada índice.
+     */
     @SuppressWarnings("unchecked")
     public TablaHash() {
         tabla = new LinkedList[TAMANIO];
@@ -22,30 +26,38 @@ public class TablaHash {
     }
 
     /**
-     * Función de hash para determinar la posición en la tabla.
+     * Calcula la posición de almacenamiento utilizando una función hash mejorada.
+     * Se usa un número primo para mejorar la distribución de los valores.
+     *
+     * @param clave ID de la persona.
+     * @return Índice en la tabla hash donde se almacenará la persona.
      */
     private int funcionHash(int clave) {
-        return clave % TAMANIO;
+        int hash = clave * 31; // Multiplicador primo para mejorar la dispersión
+        return Math.abs(hash) % TAMANIO;
     }
 
     /**
-     * Agrega una persona a la tabla hash.
-     * Si la tabla está llena, se redimensiona antes de agregar.
+     * Inserta una persona en la tabla hash. Si la tabla alcanza un factor de carga superior al 75%,
+     * se redimensiona antes de insertar el nuevo elemento.
+     *
+     * @param persona Objeto de tipo Persona que se agregará a la tabla.
      */
     public void insertar(Persona persona) {
-        // Verificamos si la tabla necesita redimensionarse (si la carga es superior al 75%)
         if ((double) cantidadElementos / TAMANIO > 0.75) {
             redimensionarTabla();
         }
 
-        // Insertamos la persona en la posición correspondiente
         int indice = funcionHash(persona.getId());
         tabla[indice].add(persona);
-        cantidadElementos++;  // Incrementamos el contador de elementos
+        cantidadElementos++;
     }
 
     /**
-     * Busca una persona por ID en la tabla hash.
+     * Busca una persona en la tabla hash a partir de su ID.
+     *
+     * @param id Identificador único de la persona.
+     * @return El objeto Persona si se encuentra, o null si no está en la tabla.
      */
     public Persona buscar(int id) {
         int indice = funcionHash(id);
@@ -58,31 +70,50 @@ public class TablaHash {
     }
 
     /**
-     * Elimina una persona de la tabla hash por ID.
+     * Verifica si la tabla hash está vacía.
+     *
+     * @return true si no hay elementos en la tabla, false en caso contrario.
+     */
+    public boolean estaVacia() {
+        return cantidadElementos == 0;
+    }
+
+    /**
+     * Elimina una persona de la tabla hash usando su ID.
+     *
+     * @param id Identificador único de la persona a eliminar.
+     * @return true si la persona fue eliminada con éxito, false si no se encontraba en la tabla.
      */
     public boolean eliminar(int id) {
         int indice = funcionHash(id);
         boolean eliminado = tabla[indice].removeIf(p -> p.getId() == id);
         if (eliminado) {
-            cantidadElementos--;  // Decrementamos el contador de elementos si se eliminó una persona
+            cantidadElementos--;
         }
         return eliminado;
     }
 
     /**
-     * Devuelve la cantidad de elementos almacenados en la tabla hash.
-     * @return Número de elementos en la tabla hash.
+     * Obtiene la cantidad de elementos almacenados actualmente en la tabla hash.
+     *
+     * @return Número de elementos en la tabla.
      */
     public int obtenerCantidadElementos() {
         return cantidadElementos;
     }
 
-
+    /**
+     * Calcula el factor de carga de la tabla hash.
+     *
+     * @return Factor de carga, definido como cantidad de elementos dividida por el tamaño de la tabla.
+     */
+    public double obtenerFactorCarga() {
+        return (double) cantidadElementos / TAMANIO;
+    }
 
     /**
-     * Muestra la tabla hash.
+     * Muestra el contenido de la tabla hash, imprimiendo cada índice y su lista de personas almacenadas.
      */
-
     public void mostrarTabla() {
         for (int i = 0; i < TAMANIO; i++) {
             System.out.println("Índice " + i + ": " + tabla[i]);
@@ -90,16 +121,15 @@ public class TablaHash {
     }
 
     /**
-     * Redimensiona la tabla hash, duplicando su tamaño y reinsertando todos los elementos.
+     * Redimensiona la tabla hash, duplicando su tamaño y reinsertando todos los elementos en la nueva estructura.
+     * Este proceso ayuda a mantener la eficiencia de las operaciones de inserción y búsqueda.
      */
     private void redimensionarTabla() {
-        // Creamos una nueva tabla con el doble de tamaño
         LinkedList<Persona>[] nuevaTabla = new LinkedList[TAMANIO * 2];
         for (int i = 0; i < nuevaTabla.length; i++) {
             nuevaTabla[i] = new LinkedList<>();
         }
 
-        // Reinsertamos todos los elementos en la nueva tabla
         for (LinkedList<Persona> lista : tabla) {
             for (Persona persona : lista) {
                 int nuevoIndice = persona.getId() % nuevaTabla.length;
@@ -107,8 +137,7 @@ public class TablaHash {
             }
         }
 
-        // Actualizamos la tabla original a la nueva tabla
         tabla = nuevaTabla;
-        TAMANIO *= 2;  // Actualizamos el tamaño de la tabla
+        TAMANIO *= 2;
     }
 }

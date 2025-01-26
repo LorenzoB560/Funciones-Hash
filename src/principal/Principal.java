@@ -27,5 +27,14 @@ public class Principal {
         // Mostrando la tabla después de eliminación
         System.out.println("Tabla hash después de eliminar:");
         gestor.mostrarPersonas();
+
+        // Buscar un ID que no existe
+        gestor.buscarPersona(100);
+
+        // Insertar varias personas para probar el redimensionamiento
+        for (int i = 200; i < 220; i++) {
+            gestor.agregarPersona(i, "Persona" + i, 20 + (i % 10));
+        }
+        gestor.mostrarPersonas();
     }
 }
