@@ -26,9 +26,12 @@ ProyectoFuncionesHash/
 │   ├── principal/
 │   │   ├── GestorPersonas.java
 │   │   ├── Principal.java
-│── build.gradle
-│── README.md
 │── .gitignore
+│── Funciones Hash.iml
+│── Funciones Hash.jar
+│── LICENSE
+│── README.md
+
 ```
 
 ### Clases Principales
