@@ -2,7 +2,7 @@
 
 ## Descripción
 
-Este proyecto implementa una estructura de datos de **Tabla Hash** en Java, utilizando **listas enlazadas** para manejar colisiones. La implementación incluye operaciones fundamentales como inserción, búsqueda, eliminación y redimensionamiento dinámico. 
+Este proyecto implementa una estructura de datos de **Tabla Hash** en Java, utilizando **listas enlazadas** para manejar colisiones. La implementación incluye operaciones fundamentales como inserción, búsqueda, eliminación y redimensionamiento dinámico.
 
 El programa permite almacenar objetos de tipo `Persona`, los cuales tienen atributos como `id`, `nombre` y `edad`. Se utiliza una función hash con un número primo para optimizar la distribución de los datos y mejorar el rendimiento de las búsquedas.
 
@@ -31,7 +31,6 @@ ProyectoFuncionesHash/
 │── Funciones Hash.jar
 │── LICENSE
 │── README.md
-
 ```
 
 ### Clases Principales
@@ -41,18 +40,12 @@ ProyectoFuncionesHash/
 - **GestorPersonas**: Gestiona la interacción con la tabla hash y ofrece una interfaz más amigable para el usuario.
 - **Principal**: Punto de entrada del programa, donde se ejecutan pruebas con la tabla hash.
 
-## Dependencias y Bibliotecas
+## Requisitos
 
-Este proyecto se basa en **Java 11+** y usa **Gradle** como herramienta de construcción.
+- **JDK 21**
+- **IntelliJ IDEA**
 
 ## Instalación y Ejecución
-
-### Requisitos
-
-- **JDK 11+**
-- **Gradle**
-
-### Pasos
 
 1. Clonar el repositorio:
    ```sh
@@ -62,14 +55,9 @@ Este proyecto se basa en **Java 11+** y usa **Gradle** como herramienta de const
    ```sh
    cd ProyectoFuncionesHash
    ```
-3. Compilar el proyecto con Gradle:
-   ```sh
-   gradle build
-   ```
-4. Ejecutar la aplicación:
-   ```sh
-   gradle run
-   ```
+3. Abrir IntelliJ IDEA y cargar el proyecto.
+4. Asegurar que la versión de JDK configurada en IntelliJ es **JDK 21**.
+5. Compilar y ejecutar la clase `Principal.java` desde IntelliJ.
 
 ## Uso
 
@@ -101,4 +89,3 @@ Persona con ID 1 eliminada correctamente.
 ## Licencia
 
 Este proyecto está bajo la licencia MIT - ver el archivo [LICENSE](LICENSE) para más detalles.
-
